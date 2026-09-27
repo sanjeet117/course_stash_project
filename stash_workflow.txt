@@ -1,22 +1,43 @@
-GIT STASH WORKFLOW DEMONSTRATION
+GIT STASH WORKFLOW - COMMAND LOG
 ================================
 
-Project: Course Management Project
+Project:
+Course Management Project
+
+Purpose:
+This file records the Git stash workflow demonstrated during the assignment.
 
 
-1. FEATURE IMPLEMENTATION
--------------------------
+1. START FEATURE DEVELOPMENT
+----------------------------
 
-Branch:
+Branch used:
+
 feature/add-course
 
-I started implementing the course duration feature in course.py.
+Command:
 
-The feature was intentionally not committed because the work was in progress.
+git switch feature/add-course
+
+Feature implementation was started in course.py.
+
+The course_duration() feature was intentionally left as unfinished work.
 
 
-2. SAVE UNCOMMITTED WORK USING GIT STASH
------------------------------------------
+2. CHECK UNCOMMITTED CHANGES
+-----------------------------
+
+Command:
+
+git status
+
+Key result:
+
+course.py was modified and the changes were not committed.
+
+
+3. SAVE UNFINISHED WORK USING STASH
+------------------------------------
 
 Command:
 
@@ -24,27 +45,31 @@ git stash
 
 Purpose:
 
-Temporarily save unfinished/uncommitted changes and make the working tree clean.
+Temporarily save unfinished uncommitted changes and make the working directory clean.
+
+Key result:
+
+The unfinished course duration changes were stored in the stash.
 
 
-3. CHECK STASH LIST
--------------------
+4. STASH LIST
+-------------
 
 Command:
 
 git stash list
 
+Key result:
+
+stash@{0}: WIP on feature/add-course: 61fc29a added course duration feature
+
 Purpose:
 
-Display all currently saved stash entries.
-
-Example:
-
-stash@{0}: WIP on feature/add-course: ...
+Displays the stash entries currently stored locally.
 
 
-4. VIEW STASH DETAILS
----------------------
+5. STASH SHOW
+-------------
 
 Command:
 
@@ -52,42 +77,74 @@ git stash show
 
 Purpose:
 
-Show a summary of the changes stored in the stash.
+Displays a summary of the changes stored in the stash.
 
-Detailed command:
+Key result:
+
+The stash contained changes to course.py.
+
+
+6. STASH SHOW -P
+----------------
+
+Command:
 
 git stash show -p
 
 Purpose:
 
-Show the actual code differences stored in the stash.
+Displays the detailed code differences stored in the stash.
+
+Key result:
+
+The course duration feature changes were visible in the stash diff.
 
 
-5. URGENT FIX
+7. SWITCH TO URGENT FIX BRANCH
+------------------------------
+
+Command:
+
+git switch main
+
+Then:
+
+git switch -c hotfix/course-display
+
+Purpose:
+
+Switch to another branch to handle an urgent fix while the feature work remained safely stored in the stash.
+
+
+8. URGENT FIX
 -------------
 
-I switched to the hotfix branch:
+The course instructor display was fixed on the hotfix/course-display branch.
 
-git switch hotfix/course-display
-
-I made an urgent fix related to course instructor display.
-
-The urgent fix was committed using:
+Commands:
 
 git add course.py
 
 git commit -m "Fix course instructor display"
 
+Key result:
 
-6. RETURN TO FEATURE BRANCH
+The urgent fix was committed successfully.
+
+
+9. RETURN TO FEATURE BRANCH
 ----------------------------
 
 Command:
 
 git switch feature/add-course
 
+Purpose:
 
-7. APPLY STASH
+Return to the original feature branch after completing the urgent fix.
+
+
+10. APPLY STASH
 --------------
 
 Command:
@@ -96,14 +153,32 @@ git stash apply
 
 Purpose:
 
-Restore the changes from the stash into the working directory.
+Restore the unfinished feature changes from the stash into the working directory.
+
+Key result:
+
+The course duration changes were restored.
 
 Important:
 
-git stash apply restores the changes but keeps the stash entry.
+git stash apply restores the changes but keeps the stash entry in the stash list.
 
 
-8. STASH POP
+11. CHECK STASH AFTER APPLY
+---------------------------
+
+Command:
+
+git stash list
+
+Key result:
+
+The stash entry was still available.
+
+This demonstrates that git stash apply does NOT remove the stash.
+
+
+12. STASH POP
 ------------
 
 Command:
@@ -112,15 +187,15 @@ git stash pop
 
 Purpose:
 
-Restore the changes from the stash and remove the stash entry after successful application.
+Restore the stashed changes and remove the stash entry after successful application.
 
-Important:
+Key result:
 
-git stash pop restores the changes and normally removes the stash entry.
+The changes were restored and the stash entry was removed.
 
 
-9. STASH DROP
--------------
+13. STASH DROP
+--------------
 
 Command:
 
@@ -130,36 +205,79 @@ Purpose:
 
 Remove a specific stash entry from the stash list.
 
+Note:
 
-10. APPLY VS POP
----------------
+A separate stash entry was used for demonstrating git stash drop after the main stash workflow.
+
+
+14. APPLY VS POP
+----------------
 
 git stash apply:
 
 - Restores the stashed changes.
 - Keeps the stash entry.
+- The stash can be reused later.
 
 git stash pop:
 
 - Restores the stashed changes.
 - Removes the stash entry after successful application.
 
+Simple difference:
 
-11. REAL DEVELOPMENT TEAM USE CASE
------------------------------------
+Apply = Restore changes + Keep stash
 
-Git stash is useful when a developer is working on an incomplete feature but suddenly needs to switch to another task, such as an urgent bug fix.
-
-Instead of committing incomplete code, the developer can use git stash to temporarily save the work, switch branches, complete the urgent fix, and then return to the original branch and restore the unfinished work.
+Pop = Restore changes + Remove stash
 
 
-12. IMPORTANT COMMANDS
-----------------------
+15. COMPLETE COMMAND SEQUENCE
+-----------------------------
+
+The stash workflow demonstrated in this assignment was:
 
 git stash
+
 git stash list
+
 git stash show
+
 git stash show -p
+
 git stash apply
+
 git stash pop
+
 git stash drop stash@{0}
+
+
+16. REAL DEVELOPMENT TEAM USE CASE
+-----------------------------------
+
+Git stash is useful when a developer is working on an incomplete feature but suddenly needs to switch to another task.
+
+For example:
+
+Developer is working on Feature A.
+Feature A is incomplete.
+An urgent production bug appears.
+The developer uses git stash.
+The developer switches to a hotfix branch.
+The urgent bug is fixed and committed.
+The developer returns to Feature A.
+The stashed changes are restored.
+Feature A development continues.
+
+
+17. IMPORTANT CONCEPT
+---------------------
+
+Completed work:
+
+git commit
+
+Temporary unfinished work:
+
+git stash
+
+The main purpose of Git stash is to temporarily save unfinished changes without creating an unnecessary commit.
