@@ -1,0 +1,165 @@
+GIT STASH WORKFLOW DEMONSTRATION
+================================
+
+Project: Course Management Project
+
+
+1. FEATURE IMPLEMENTATION
+-------------------------
+
+Branch:
+feature/add-course
+
+I started implementing the course duration feature in course.py.
+
+The feature was intentionally not committed because the work was in progress.
+
+
+2. SAVE UNCOMMITTED WORK USING GIT STASH
+-----------------------------------------
+
+Command:
+
+git stash
+
+Purpose:
+
+Temporarily save unfinished/uncommitted changes and make the working tree clean.
+
+
+3. CHECK STASH LIST
+-------------------
+
+Command:
+
+git stash list
+
+Purpose:
+
+Display all currently saved stash entries.
+
+Example:
+
+stash@{0}: WIP on feature/add-course: ...
+
+
+4. VIEW STASH DETAILS
+---------------------
+
+Command:
+
+git stash show
+
+Purpose:
+
+Show a summary of the changes stored in the stash.
+
+Detailed command:
+
+git stash show -p
+
+Purpose:
+
+Show the actual code differences stored in the stash.
+
+
+5. URGENT FIX
+-------------
+
+I switched to the hotfix branch:
+
+git switch hotfix/course-display
+
+I made an urgent fix related to course instructor display.
+
+The urgent fix was committed using:
+
+git add course.py
+
+git commit -m "Fix course instructor display"
+
+
+6. RETURN TO FEATURE BRANCH
+----------------------------
+
+Command:
+
+git switch feature/add-course
+
+
+7. APPLY STASH
+--------------
+
+Command:
+
+git stash apply
+
+Purpose:
+
+Restore the changes from the stash into the working directory.
+
+Important:
+
+git stash apply restores the changes but keeps the stash entry.
+
+
+8. STASH POP
+------------
+
+Command:
+
+git stash pop
+
+Purpose:
+
+Restore the changes from the stash and remove the stash entry after successful application.
+
+Important:
+
+git stash pop restores the changes and normally removes the stash entry.
+
+
+9. STASH DROP
+-------------
+
+Command:
+
+git stash drop stash@{0}
+
+Purpose:
+
+Remove a specific stash entry from the stash list.
+
+
+10. APPLY VS POP
+---------------
+
+git stash apply:
+
+- Restores the stashed changes.
+- Keeps the stash entry.
+
+git stash pop:
+
+- Restores the stashed changes.
+- Removes the stash entry after successful application.
+
+
+11. REAL DEVELOPMENT TEAM USE CASE
+-----------------------------------
+
+Git stash is useful when a developer is working on an incomplete feature but suddenly needs to switch to another task, such as an urgent bug fix.
+
+Instead of committing incomplete code, the developer can use git stash to temporarily save the work, switch branches, complete the urgent fix, and then return to the original branch and restore the unfinished work.
+
+
+12. IMPORTANT COMMANDS
+----------------------
+
+git stash
+git stash list
+git stash show
+git stash show -p
+git stash apply
+git stash pop
+git stash drop stash@{0}
