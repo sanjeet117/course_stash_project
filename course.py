@@ -10,7 +10,12 @@ class Course:
         print(f"Course Name: {self.course_name}")
         print(f"Instructor: {self.instructor}")
 
+    def course_duration(self):
+        print("Course Duration: 3 Months")
+
 
 course = Course(101, "Python Programming", "Sanjeet")
 
 course.display_course()
+course.course_duration()
+
