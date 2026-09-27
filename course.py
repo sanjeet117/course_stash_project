@@ -8,7 +8,7 @@ class Course:
     def display_course(self):
         print(f"Course ID: {self.course_id}")
         print(f"Course Name: {self.course_name}")
-        print(f"Instructor: {self.instructor}")
+        print(f"course Instructor: {self.instructor}")
 
 
 course = Course(101, "Python Programming", "Sanjeet")
