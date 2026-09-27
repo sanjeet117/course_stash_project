@@ -1,22 +1,54 @@
-# Course Management Project - Git Stash Assignment
+## Git Stash Command Log
 
-## Project Overview
+### 1. git stash
+Command:
+git stash
 
-This is a simple Python Course Management project created to demonstrate Git branching, Git stash, urgent fixes, and GitHub workflow.
+Output:
+Saved working directory and index state WIP on feature/add-course
 
-The main purpose of this project is to demonstrate how Git stash can be used when unfinished work needs to be temporarily saved while another urgent task is handled.
+### 2. git stash list
+Command:
+git stash list
 
-## Working Project
+Output:
+stash@{0}: WIP on feature/add-course: 61fc29a added course duration feature
 
-The `course.py` file contains a `Course` class with:
+### 3. git stash show
+Command:
+git stash show
 
-- Course ID
-- Course Name
-- Instructor
-- Course Duration
+Output:
+course.py | 5 +++++
 
-The program creates a Course object and calls:
+### 4. git stash apply
+Command:
+git stash apply
 
-```python
-course.display_course()
-course.course_duration()
+Output:
+Changes restored to the working directory.
+The stash remained in the stash list.
+
+### 5. git stash pop
+Command:
+git stash pop
+
+Output:
+Changes restored and the stash entry was removed.
+
+### 6. git stash drop
+Command:
+git stash drop stash@{0}
+
+Output:
+Dropped stash@{0}
+
+## Difference Between git stash apply and git stash pop
+
+git stash apply:
+Restores the stashed changes but keeps the stash entry.
+
+git stash pop:
+Restores the stashed changes and removes the stash entry after applying it.
+
+Therefore, apply is useful when we may need the same stash again, while pop is useful when we are sure the stash is no longer needed.
